@@ -1,42 +1,52 @@
-import {Navigate, Route, Routes} from 'react-router-dom';
-import {useAuthStore} from './store/useAuthStore.ts';
-import {Login} from './pages/Login';
-import {Register} from './pages/Register';
-import {Container, CssBaseline} from '@mui/material';
-import {useEffect} from 'react';
+import {ReactNode} from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { useAuthStore } from './store/useAuthStore.ts';
+import { Login } from './pages/Login';
+import { Register } from './pages/Register';
+import { Container, CssBaseline } from '@mui/material';
+import { Posts } from './pages/Posts.tsx';
+import { CreatePost } from './pages/CreatePost.tsx';
+import Header from './components/Header.tsx';
 import {Home} from './pages/Home.tsx';
-import './App.css';
+import Profile from "./pages/Profile.tsx";
 
 
+const PrivateRoute = ({ element }: { element: ReactNode }) => {
+  const { user } = useAuthStore();
+  return user ? element : <Navigate to=
+                                        "/login" />;
+};
+const PublicRoute = ({ element }: { element: ReactNode }) => {
+  const { user } = useAuthStore();
+  return !user ? element : <Navigate to=
+                                         "/" />;
+};
 export const App = () => {
-  const {user, setUser} = useAuthStore();
-  const savedUser = localStorage.getItem('user');
-
-  useEffect(() => {
-    if (!user && savedUser) {
-      const parsedUser = JSON.parse(savedUser);
-      setUser(parsedUser);
-    }
-  }, [user, savedUser]);
-
-
   return (
-    <>
-      <CssBaseline/>
-      <Container sx={{ mt: 5 }}>
-        <Routes>
-          <Route path="/" element={
-            user ? <Home/> : <Navigate to="/login"/>
-          }/>
-          <Route path="/login" element={
-            !user ? <Login/> : <Navigate to="/"/>
-          }/>
-          <Route path="/register" element={
-            !user ? <Register/> : <Navigate to="/"/>
-          }/>
-        </Routes>
-      </Container>
-    </>
+      <>
+        <CssBaseline />
+        <Header />
+        <Container sx={{ mt: 5 }}>
+          <Routes>
+            <Route path=
+                       "/" element={<PrivateRoute element={<Posts />} />} />
+            <Route path=
+                       "/add-post" element={<PrivateRoute element={<CreatePost />} />}
+            />
+            <Route path=
+                       "/login" element={<PublicRoute element={<Login />} />} />
+            <Route path=
+                       "/register" element={<PublicRoute element={<Register />} />} />
+            <Route path=
+                       "*" element={<Navigate to="/" />} />
+            <Route path=
+                       "/home" element={<PrivateRoute element={<Home />}/>}/>
+            <Route path=
+                       "/profile" element={<PrivateRoute element={<Profile />}/>}/>
+
+          </Routes>
+        </Container>
+      </>
   );
 };
 export default App;
