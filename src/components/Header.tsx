@@ -13,7 +13,7 @@ import {userSignOut} from '../firebase.ts';
 export default function Header() {
     const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const {user, clearUser} = useAuthStore();
+    const {user, clearUser, profile} = useAuthStore();
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
@@ -52,6 +52,7 @@ export default function Header() {
                             onClose={handleClose}
                         >
                             <MenuItem onClick={() => handleClose('/')}>Home</MenuItem>
+                            {!profile && (<MenuItem onClick={() => handleClose('/create-profile')}>Create Profile</MenuItem>)}
                             <MenuItem onClick={() => handleClose('Profile')}>Profile</MenuItem>
                             <MenuItem onClick={() => handleClose('/add-post')}>Add
                                 post</MenuItem>
