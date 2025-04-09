@@ -15,8 +15,12 @@
     "@mui/icons-material": "^7.0.1",
     "@mui/material": "^7.0.1",
     "axios": "^1.8.4",
+<<<<<<< HEAD
     "firebase": "^11.5.0",
     "i": "^0.3.7",
+=======
+    "firebase": "^11.6.0",
+>>>>>>> 84ea1ff005b11214180328090c321b687f5c7b43
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.4.1",
