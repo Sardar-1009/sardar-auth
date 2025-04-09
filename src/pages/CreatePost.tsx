@@ -18,13 +18,13 @@ export const CreatePost = () => {
         })
         setContent('');
     }
-    if (profile?.role === "admin" || profile) {
-        return (
-        <Typography variant="h6" align="center" color="error">
-        You are not authorized to create a post!
-        <br /> Only admins can create posts.
-        </Typography>
-        );
+        if (profile?.role === "admin") {
+            return (
+            <Typography variant="h6" align="center" color="error">
+                You are not authorized to create a post!
+                <br /> Only admins can create posts.
+            </Typography>
+            );
         }
         
     return (
