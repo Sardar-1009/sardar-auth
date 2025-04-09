@@ -9,6 +9,7 @@ import { CreatePost } from './pages/CreatePost.tsx';
 import Header from './components/Header.tsx';
 import {Home} from './pages/Home.tsx';
 import Profile from "./pages/Profile.tsx";
+import { CreateProfile } from './pages/CreateProfile.tsx';
 
 
 const PrivateRoute = ({ element }: { element: ReactNode }) => {
@@ -43,7 +44,9 @@ export const App = () => {
                        "/home" element={<PrivateRoute element={<Home />}/>}/>
             <Route path=
                        "/profile" element={<PrivateRoute element={<Profile />}/>}/>
-
+            <Route
+                  path=
+                        "/create-profile"  element={<PrivateRoute element={<CreateProfile />} />}/>
           </Routes>
         </Container>
       </>

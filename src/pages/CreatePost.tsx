@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { Button, TextField, Container, Box } from '@mui/material';
+import { Button, TextField, Container, Box, Typography } from '@mui/material';
 import { useAuthStore } from '../store/useAuthStore.ts';
 import {axiosApi} from '../axiosAPI.ts';
+
+
+
 export const CreatePost = () => {
     const [content, setContent] = useState('');
-    const { user } = useAuthStore();
+    const { user, profile } = useAuthStore();
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!user) return;
@@ -16,6 +19,14 @@ export const CreatePost = () => {
                 createdAt: new Date().toISOString(),
             });
         setContent('');
+        if (profile?.role !== "admin" || !profile) {
+            return (
+        <Typography variant="h6" align="center" color="error">
+            You are not authorized to create a post!
+            <br /> Only admins can create posts.
+        </Typography>
+        );
+        }
     };
     return (
         <Container maxWidth=
