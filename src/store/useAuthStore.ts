@@ -10,7 +10,7 @@ interface UserState {
 }
 
 const getInitialData = (): IUser | null => {
-    const savedState = localStorage.getItem('user');
+    const savedState = localStorage.getItem("user");
     return savedState ? JSON.parse(savedState) : null;
 };
 
@@ -23,7 +23,7 @@ export const useAuthStore = create<UserState>((set) => ({
     user: getInitialData(),
     profile: getInitialProfile(),
     setUser: (user) => {
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem("user", JSON.stringify(user));
         set({ user })
     },
     setProfile: (profile) => {
@@ -31,8 +31,8 @@ export const useAuthStore = create<UserState>((set) => ({
         set({ profile });
         },
     clearUser: () => {
-        localStorage.removeItem('user');
-        localStorage.removeItem('profile');
+        localStorage.removeItem("user");
+        localStorage.removeItem("profile");
         set({ user: null, profile: null })
     },
 }));

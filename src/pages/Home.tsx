@@ -4,7 +4,7 @@ import {userSignOut} from '../firebase.ts';
 import {Link} from 'react-router-dom';
 
 export const Home = () => {
-  const { user , clearUser} = useAuthStore();
+  const { user, clearUser} = useAuthStore();
   if (user) {
     return <div>
       <Typography variant="body2" >Email:{user.email}</Typography>

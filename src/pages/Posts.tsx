@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Box, List, ListItem, Typography, Select, MenuItem } from '@mui/material';
+import {Box, List, ListItem, Typography, Select, MenuItem, Card} from '@mui/material';
+import {Link} from 'react-router-dom'
 import { useAuthStore } from '../store/useAuthStore';
 import {IPost} from '../types'
 import { getPosts } from '../api/posts';
@@ -39,7 +40,12 @@ export const Posts = () => {
         {posts.map((post) => (
           <ListItem key={post.id}>
             <Typography>
-              {post.content} - {new Date(post.createdAt).toLocaleDateString()}
+                <Card
+                component={Link}
+                to={`/post/${post.id}`}
+                >
+                    {post.content} - {new Date(post.createdAt).toLocaleDateString()}
+                </Card>
             </Typography>
           </ListItem>
         ))}

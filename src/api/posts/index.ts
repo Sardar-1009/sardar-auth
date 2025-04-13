@@ -1,6 +1,7 @@
 import { collection, addDoc, query, orderBy, where, getDocs } from 'firebase/firestore'
 import {IPost} from '../../types'; 
 import { db } from '../../firebase'
+import axios from "axios";
 
 export const createPost = async (post:Omit<IPost, 'id'>) => {
     const postsCollection = collection(db, 'posts');
@@ -36,3 +37,8 @@ export const getPosts = async (userId?:string):Promise<IPost[]> => {
       })) as IPost[];
     
 }
+
+export const getPost = async (id: string): Promise<IPost> => {
+    const response = await axios.get(`/posts/${id}`);
+    return response.data;
+};

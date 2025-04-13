@@ -52,7 +52,6 @@ export const CreateProfile = () => {
       [name]: value,
     }));
   };
-
   const handleSelectChange = (e: SelectChangeEvent) => {
     const { name, value } = e.target;
     setFormData((prev) => ({

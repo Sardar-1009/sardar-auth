@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, TextField, Container, Box, Typography } from '@mui/material';
 import { useAuthStore } from '../store/useAuthStore.ts';
-import { createPost } from '../api/posts/index.ts';
+import { createPost } from '../api/posts';
 export const CreatePost = () => {
     const [content, setContent] = useState('');
     const { user, profile } = useAuthStore();
@@ -18,14 +18,14 @@ export const CreatePost = () => {
         })
         setContent('');
     }
-        if (profile?.role === "admin") {
-            return (
+    if (profile?.role === "admin") {
+        return (
             <Typography variant="h6" align="center" color="error">
                 You are not authorized to create a post!
                 <br /> Only admins can create posts.
             </Typography>
-            );
-        }
+        );
+    }
         
     return (
         <Container maxWidth=
