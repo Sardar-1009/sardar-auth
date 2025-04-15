@@ -52,6 +52,10 @@ export const CreateProfile = () => {
       [name]: value,
     }));
   };
+<<<<<<< HEAD
+=======
+
+>>>>>>> 39ce9c87b762ba43453b1e4927d8979ec2529fa3
   const handleSelectChange = (e: SelectChangeEvent) => {
     const { name, value } = e.target;
     setFormData((prev) => ({

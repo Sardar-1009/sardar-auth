@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Button, TextField, Container, Typography, Box } from '@mui/material';
 import { emailSignIn } from '../firebase';
-
 import { Link, useNavigate } from 'react-router-dom';
 import {useAuthStore} from '../store/useAuthStore.ts';
 import { getUserById } from '../api/users/index.ts';
@@ -12,10 +11,15 @@ export const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { setUser, setProfile } = useAuthStore();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 39ce9c87b762ba43453b1e4927d8979ec2529fa3
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+<<<<<<< HEAD
       const { user } = await emailSignIn(email, password);
       setUser({email: user.email, id: user.uid})
       if (user.uid) {
@@ -27,8 +31,22 @@ export const Login = () => {
 navigate('/')
     } catch (error) {
       setError(`Error: ${error}`);
+=======
+    const { user } = await emailSignIn(email, password);
+    if (user.uid) {
+    const userFull = await getUserById(user.uid);
+    if (userFull) {
+    setProfile(userFull);
+>>>>>>> 39ce9c87b762ba43453b1e4927d8979ec2529fa3
     }
-  };
+    }
+    setUser({ email: user.email, id: user.uid });
+    navigate("/");
+    } catch (error) {
+    setError(`Error: ${error}`);
+    }
+    };
+
 
   return (
     <Container maxWidth="xs">
